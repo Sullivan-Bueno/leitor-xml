@@ -14,4 +14,4 @@ Ao finalizar tudo testei e deu certo, consegui extrair numero da nota, descriç�
 Pelo power automate, automatizei o processo de fazer uma planilha colocando essas informações em ordem.
 
 Única coisa necessaria pra rodar esse script e acessar as informações do xml, é criar uma pasta e por todos arquivos dentro dela, por o xml junto ao script e nomeá-lo: "xml.xml"
-Assim que rodar, localhost:3000 estará acessível na sua máquina com todas informações da nota.
+Assim que iniciar o arquivo express.js, localhost:3000 estará acessível na sua máquina com todas informações da nota.
