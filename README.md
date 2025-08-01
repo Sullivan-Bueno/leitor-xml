@@ -13,5 +13,5 @@ Então tive uma ideia de fazer uma API com endpoints que me entregassem as infor
 Ao finalizar tudo testei e deu certo, consegui extrair numero da nota, descrição do produto, quantidade, valor e numero de série do produto que é o que eu precisava.
 Pelo power automate, automatizei o processo de fazer uma planilha colocando essas informações em ordem.
 
-Única coisa necessária pra rodar esse script e acessar as informações do xml, é criar uma pasta e por todos arquivos dentro dela, por o xml junto ao script e nomeá-lo: "xml.xml"
+Única coisa necessária pra rodar esse script e acessar as informações do xml, é criar uma pasta e por todos arquivos dentro dela, por o xml junto ao script e nomeá-lo: "xml.xml". Necessário também rodar o npm install, para criar a pasta node_modules antes de rodar o código
 Assim que iniciar o arquivo express.js com node, localhost:3000 estará acessível na sua máquina com todas informações da nota.
