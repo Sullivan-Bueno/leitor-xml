@@ -1,42 +1,45 @@
 const fs = require("fs");
 const xml2js = require("xml2js");
 
-function lerXml() {
-  let xml = null;
-  fs.readFile("xml.xml", (err, data) => {
-    if (err) {
-      console.log("Erro ao ler arquivo:", err);
-      return;
-    }
-
-    xml2js.parseString(data, (err, result) => {
+function lerXml(arquivo) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(arquivo, (err, data) => {
+      let xml = null;
       if (err) {
-        console.log("Deu erro:", err);
-        return;
+        reject(console.log("Não foi possível encontrar o arquivo"));
       }
-      xml = result;
-    });
-    const products = xml.nfeProc.NFe[0].infNFe[0].det;
-    const productNumber = {};
-    const productDescription = {};
-    const productQuantity = {};
-    const productvalue = {};
 
-    for (let i = 0; i < Object.keys(products).length; i++) {
-      productNumber[i] = products[i].prod[0].cProd;
-      productDescription[i] = products[i].prod[0].xProd;
-      productQuantity[i] = products[i].prod[0].qCom;
-      productvalue[i] = products[i].prod[0].vUnCom;
-    }
+      xml2js.parseString(data, (err, result) => {
+        if (err) {
+          reject(console.log(err));
+        }
+        xml = result;
+      });
 
-    resolve({
-      productNumber,
-      productDescription,
-      productQuantity,
-      productvalue,
-      products,
+      const nfNumber = xml.nfeProc.NFe[0].infNFe[0].ide[0].nNF;
+      const products = xml.nfeProc.NFe[0].infNFe[0].det;
+      const productNumber = {};
+      const productDescription = {};
+      const productQuantity = {};
+      const productValue = {};
+
+      for (let i = 0; i < Object.keys(products).length; i++) {
+        productNumber[i] = products[i].prod[0].cProd;
+        productDescription[i] = products[i].prod[0].xProd;
+        productQuantity[i] = products[i].prod[0].qCom;
+        productValue[i] = products[i].prod[0].vUnCom;
+      }
+
+      resolve({
+        products,
+        productNumber,
+        productDescription,
+        productQuantity,
+        productValue,
+        nfNumber,
+      });
     });
   });
 }
 
-module.export = { lerXml };
+module.exports = { lerXml };
